@@ -1,0 +1,385 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Tahoma,sans-serif;
+}
+
+body{
+
+    background:
+    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1600");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+
+    min-height:100vh;
+}
+
+
+/*==============================
+            HEADER
+==============================*/
+
+header{
+
+    background:#111;
+
+    padding:20px 40px;
+
+    border-bottom:3px solid #ff6b00;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+}
+
+.top-bar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.logo{
+
+    font-size:35px;
+
+    font-weight:bold;
+
+    color:#ff6b00;
+
+}
+
+.logo span{
+
+    color:#ff6b00;
+
+}
+
+
+/*==============================
+             NAV
+==============================*/
+
+nav a{
+
+    color:white;
+
+    text-decoration:none;
+
+    margin-left:25px;
+
+    font-size:18px;
+
+    transition:.3s;
+
+}
+
+nav a:hover{
+
+    color:#ff6b00;
+
+    box-shadow:0 0 25px rgba(255,107,0,.6);
+
+}
+
+.active{
+
+    color:#ff6b00;
+
+    font-weight:bold;
+
+}
+
+
+/*==============================
+            TITLE
+==============================*/
+
+.title{
+
+    text-align:center;
+
+    padding:70px 20px 40px;
+
+    color:white;
+
+}
+
+.title h1{
+
+    font-size:50px;
+
+    margin-bottom:15px;
+
+    color:#ff6b00;
+
+    text-shadow:3px 3px 10px black;
+
+}
+
+.title p{
+
+    font-size:20px;
+
+    color:#eee;
+
+}
+
+
+/*==============================
+             MENU
+==============================*/
+
+.menu{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+
+    padding:30px;
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+
+/*==============================
+             CARD
+==============================*/
+
+.card{
+
+    background:#1b1b1b;
+
+    border:2px solid #ff6b00;
+
+    border-radius:18px;
+
+    color:white;
+
+    overflow:hidden;
+
+    position:relative;
+
+    transition:.4s;
+
+    box-shadow:0 0 20px rgba(0,0,0,.5);
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 0 25px rgba(255,107,0,.6);
+
+}
+
+
+/*==============================
+             IMAGE
+==============================*/
+
+.card img{
+
+    width:100%;
+
+    height:200px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+
+/*==============================
+             NUMBER
+==============================*/
+
+.number{
+
+    position:absolute;
+
+    top:15px;
+
+    left:15px;
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    background:#ff6b00;
+
+    color:white;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+/*==============================
+              TITLE
+==============================*/
+
+.card h2{
+
+    text-align:center;
+
+    margin:18px 0 10px;
+
+    font-size:24px;
+
+}
+
+
+/*==============================
+              PRICE
+==============================*/
+
+.price{
+
+    text-align:center;
+
+    margin:10px 15px;
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    color:#ff6b00;
+
+}
+
+
+/*==============================
+             BUTTONS
+==============================*/
+
+.card button{
+
+    display:block;
+
+    width:90%;
+
+    margin:12px auto;
+
+    padding:14px;
+
+    border:none;
+
+    background:#ff6b00;
+
+    color:white;
+
+    font-size:18px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.card button:hover{
+
+    background:#e05500;
+
+    box-shadow:0 0 25px rgba(255,107,0,.6);
+
+    transform:translateY(-2px);
+
+}
+
+
+/*==============================
+             FOOTER
+==============================*/
+
+footer{
+
+    background:rgba(0,0,0,.7);
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+
+    margin-top:40px;
+
+}
+
+
+/*==============================
+             MOBILE
+==============================*/
+
+@media(max-width:768px){
+
+    header{
+
+        padding:20px;
+
+    }
+
+    .top-bar{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+    nav{
+
+        margin-top:15px;
+
+        text-align:center;
+
+    }
+
+    nav a{
+
+        display:inline-block;
+
+        margin:8px;
+
+    }
+
+    .menu{
+
+        padding:20px;
+
+        grid-template-columns:1fr;
+
+    }
+
+}
