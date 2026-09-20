@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SPEED FOOD | سلة المشتريات</title>
+
+<link rel="stylesheet" href="cart.css">
+
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="top-bar">
+
+       <div class="logo">
+            <img src="../1.png" alt="" width="100px">
+             <span>SPEED FOOD</span>
+        </div>
+
+        <nav>
+
+            
+            <a href="menu.html">القائمة</a>
+            <a href="index.html">الرئيسية</a>
+            <a href="offers.html">العروض</a>
+            <a href="order.html">الطلبات</a>
+        </nav>
+
+        <div class="cart">
+            🛒
+            <span id="cart-count">0</span>
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= TITLE ================= -->
+
+<section class="title">
+
+    <h1>🛒 سلة المشتريات</h1>
+
+   <h3>
+        هنا تجد جميع الوجبات التي اخترتها
+   </h3>
+
+</section>
+
+
+<!-- ================= CART ================= -->
+
+<section class="cart-page">
+
+    <div class="cart-container">
+
+        <!-- المنتجات -->
+
+        <div class="cart-list">
+
+            <h2>🍴 طلباتك</h2>
+
+            <div id="cartItems">
+
+                <!-- المنتجات تظهر هنا بواسطة JavaScript -->
+
+            </div>
+
+            <div id="emptyCart">
+
+                🛒
+
+                <h2>
+                    السلة فارغة
+                </h2>
+
+                <p>
+                    لم تقم بإضافة أي وجبة بعد.
+                </p>
+
+                <a href="menu.html">
+                    العودة إلى القائمة
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ملخص الطلب -->
+
+        <div class="cart-summary">
+
+            <h2>
+                📋 ملخص الطلب
+            </h2>
+
+            <div class="summary-row">
+
+                <span>
+                    عدد المنتجات
+                </span>
+
+                <strong id="summary-count">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="summary-line"></div>
+
+            <div class="summary-row total">
+
+                <span>
+                    المجموع
+                </span>
+
+                <strong id="cart-total-price">
+                    0 دج
+                </strong>
+
+            </div>
+
+            <button
+                class="checkout-btn"
+                onclick="goToOrder()">
+
+                إتمام الطلب
+
+            </button>
+
+            <a
+                href="menu.html"
+                class="continue-btn">
+
+                ← متابعة التسوق
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    © 2026 SPEED FOOD - جميع الحقوق محفوظة
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="script.js/mune.js"></script>
+
+
+<script>
+
+function updateCartPage() {
+
+    let cart =
+        JSON.parse(localStorage.getItem("technoCart")) || [];
+
+    let box =
+        document.getElementById("cartItems");
+
+    let empty =
+        document.getElementById("emptyCart");
+
+    let count =
+        document.getElementById("cart-count");
+
+    let summaryCount =
+        document.getElementById("summary-count");
+
+    let totalElement =
+        document.getElementById("cart-total-price");
+
+
+    box.innerHTML = "";
+
+    let total = 0;
+    let products = 0;
+
+
+    if (cart.length === 0) {
+
+        empty.style.display = "block";
+
+        summaryCount.innerHTML = "0";
+
+        totalElement.innerHTML = "0 دج";
+
+        count.innerHTML = "0";
+
+        return;
+
+    }
+
+
+    empty.style.display = "none";
+
+
+    cart.forEach(function(item) {
+
+        let itemTotal =
+            item.price * item.qty;
+
+        total += itemTotal;
+
+        products += item.qty;
+
+
+        box.innerHTML += `
+
+        <div class="cart-page-item">
+
+            <div class="cart-info">
+
+                <h3>
+                    ${item.name}
+                </h3>
+
+                <p>
+                    السعر:
+                    ${item.price} دج
+                </p>
+
+            </div>
+
+
+            <div class="cart-quantity">
+
+                <button
+                    onclick="pageIncrease(${item.id})">
+
+                    +
+
+                </button>
+
+                <span>
+                    ${item.qty}
+                </span>
+
+                <button
+                    onclick="pageDecrease(${item.id})">
+
+                    -
+
+                </button>
+
+            </div>
+
+
+            <div class="cart-item-total">
+
+                ${itemTotal.toLocaleString()} دج
+
+            </div>
+
+
+            <button
+                class="remove-btn"
+                onclick="pageRemove(${item.id})">
+
+                🗑️
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+
+    count.innerHTML = products;
+
+    summaryCount.innerHTML = products;
+
+    totalElement.innerHTML =
+        total.toLocaleString() + " دج";
+
+}
+
+
+function pageIncrease(id) {
+
+    let cart =
+        JSON.parse(localStorage.getItem("technoCart")) || [];
+
+    let product =
+        cart.find(item => item.id == id);
+
+    if (product) {
+
+        product.qty++;
+
+    }
+
+    localStorage.setItem(
+        "technoCart",
+        JSON.stringify(cart)
+    );
+
+    updateCartPage();
+
+}
+
+
+function pageDecrease(id) {
+
+    let cart =
+        JSON.parse(localStorage.getItem("technoCart")) || [];
+
+    let product =
+        cart.find(item => item.id == id);
+
+    if (!product) return;
+
+
+    product.qty--;
+
+
+    if (product.qty <= 0) {
+
+        cart =
+            cart.filter(item => item.id != id);
+
+    }
+
+
+    localStorage.setItem(
+        "technoCart",
+        JSON.stringify(cart)
+    );
+
+    updateCartPage();
+
+}
+
+
+function pageRemove(id) {
+
+    let cart =
+        JSON.parse(localStorage.getItem("technoCart")) || [];
+
+    cart =
+        cart.filter(item => item.id != id);
+
+
+    localStorage.setItem(
+        "technoCart",
+        JSON.stringify(cart)
+    );
+
+    updateCartPage();
+
+}
+
+
+function goToOrder() {
+
+    let cart =
+        JSON.parse(localStorage.getItem("technoCart")) || [];
+
+
+    if (cart.length === 0) {
+
+        alert("السلة فارغة!");
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "order.html";
+
+}
+
+
+updateCartPage();
+
+</script>
+
+</body>
+
+</html>
